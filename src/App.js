@@ -1,17 +1,25 @@
-import './App.css';
 import {motion} from 'framer-motion';
+import { useState } from 'react';
+import Modal from './components/Modal';
 
 function App() {
+
+  const [modalOpen, setModalOpen] = useState(false);
+
+  const close = () => setModalOpen(false);
+  const open = () => setModalOpen(true); 
+
   return (
     <div>
         <motion.button 
           whileHover={{scale: 1.1}}
           whileTap={{scale: 0.9}}
           className='save-button'
-          onClick={() => null}
+          onClick={() => (modalOpen ? close() : open())}
         >
           Launch modal 
-        </motion.button>
+        </motion.button> 
+        {modalOpen && <Modal modalOpen = {modalOpen} handleClose = {close}/>}
     </div>
   );
 }
